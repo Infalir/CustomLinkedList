@@ -31,6 +31,15 @@ class MyLinkedListTest {
     }
 
     @Test
+    void testAddFirstToEmptyList(){
+        MyLinkedList<Integer> empty = new MyLinkedList<>();
+        empty.addFirst(1);
+        assertEquals(1, empty.size());
+        assertEquals(1, empty.getFirst());
+        assertEquals(1, empty.getLast());
+    }
+
+    @Test
     void testAddLast(){
         list.addLast(40);
         assertEquals(4, list.size());
@@ -45,13 +54,35 @@ class MyLinkedListTest {
     }
 
     @Test
+    void testAddByNegativeIndex(){
+        assertThrows(IndexOutOfBoundsException.class, () -> list.add(-1, 15));
+    }
+
+    @Test
+    void testAddByOutOfBoundsIndex(){
+        assertThrows(IndexOutOfBoundsException.class, () -> list.add(6, 15));
+    }
+
+    @Test
     void testGetFirst(){
         assertEquals(10, list.getFirst());
     }
 
     @Test
+    void testGetFirstOnEmptyList(){
+        MyLinkedList<Integer> empty = new MyLinkedList<>();
+        assertThrows(NoSuchElementException.class, empty::getFirst);
+    }
+
+    @Test
     void testGetLast(){
         assertEquals(30, list.getLast());
+    }
+
+    @Test
+    void testGetLastOnEmptyList(){
+        MyLinkedList<Integer> empty = new MyLinkedList<>();
+        assertThrows(NoSuchElementException.class, empty::getLast);
     }
 
     @Test
